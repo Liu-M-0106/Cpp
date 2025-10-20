@@ -14,10 +14,11 @@
             "stopAtEntry": false, // 设为true时程序将暂停在程序入口处，我一般设置为true
             "cwd": "${workspaceRoot}", // 调试程序时的工作目录
             "targetArchitecture": "x86_64", // 生成目标架构，一般为x86或x64，可以为x86, arm, arm64, mips, x64, amd64, x86_64
-            "externalConsole": true,
+            // "externalConsole": true,
             "internalConsoleOptions": "neverOpen",
             "MIMode": "gdb", //调试器名称
-            "miDebuggerPath": "C:\\Program Files\\LLVM\\bin\\gdb.exe", //调试器路径
+            "miDebuggerPath": "E:\\Coding\\Path\\Cpath\\msys64\\mingw64\\bin\\gdb.exe", //调试器路径
+            // "miDebuggerArgs": "C:\\Users\\LiuM0\\.vscode\\extensions\\ms-vscode.cpptools-1.26.3-win32-x64\\LLVM\\bin\\gdb.exe",
             "preLaunchTask": "clang++", //和tasks.json的label值要相同
             "setupCommands": [
                 {
