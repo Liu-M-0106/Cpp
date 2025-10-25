@@ -55,9 +55,9 @@ int binarySearch_open(vector<int>& nums,int target)
 
 int main()
 {
-	int nums[] = {-1,0,3,5,9,12};
-	int target = 2;
-	binarySearch(nums,target);
-
+	vector<int> nums = {-1,0,3,5,9,12};
+	int target = 0;
+	int a =binarySearch(nums,target);
+	cout<<a;
 	return 0;
 }
