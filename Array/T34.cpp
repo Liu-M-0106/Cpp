@@ -6,7 +6,7 @@
 #include<vector>
 using namespace std;
 
-// 个人题解
+// 个人题解（两个二分法分别判断左右区间）
 // class Solution {
 // public:
 //     vector<int> searchRange(vector<int>& nums, int target) {
@@ -74,7 +74,7 @@ using namespace std;
 // 		return -1;
 // 	}
 // };
-// 代码随想录题解
+// 代码随想录题解（两个二分法分别判断左右区间）
 // class Solution {
 // public:
 //     vector<int> searchRange(vector<int>& nums, int target) {
@@ -119,7 +119,7 @@ using namespace std;
 //         return leftBorder;
 //     }
 // };
-// 标准题解
+// 标准题解（两次半开区间二分法判断）
 // class Solution {
 // public:
 //     vector<int> searchRange(vector<int>& nums, int target) {
@@ -148,54 +148,82 @@ using namespace std;
 //     }
 // };
 
-// 自写题解
-class Solution{
+// // 自写题解-10.26参考标准题解-注意if部分
+// class Solution{
+// public:
+// 	vector<int> searchRange(vector<int>& nums, int target){
+// 		if (nums.size() == 0)
+// 		{
+// 			return {-1,-1};
+// 		}
+// 		int left = 0,right = nums.size();
+// 		while(left<right)
+// 		{
+// 			int mid = left + (right - left)/2;
+// 			if (nums[mid] > target)
+// 			{
+// 				right = mid;
+// 			}
+// 			else left = mid + 1;
+// 		}
+// 		int r = right-1;
+//         left = 0;
+//         right = nums.size();
+//         while(left < right)
+// 		{
+// 			int mid = left + (right - left)/2;
+// 			if (nums[mid] >= target)
+// 			{
+// 				right = mid;
+// 			}
+// 			else left = mid + 1;
+// 		}
+// 		int l = right;
+// 		// if (l>=r )
+// 		// {
+// 		// 	return {-1,-1};
+// 		// }
+// 		// else {return {l,r};}
+//         if (l < nums.size() && nums[l] == target)
+//         {
+//             return {l, r};
+//         }
+//         return {-1, -1};
+// 	}
+// };
+// 10.28 自写题解-参考标准题解-注意结果输出if部分存在隐患
+class Solution {
 public:
-	vector<int> searchRange(vector<int>& nums, int target){
-		if (nums.size() == 0)
-		{
-			return {-1,-1};
-		}
-		int left = 0,right = nums.size();
-		while(left<right)
-		{
-			int mid = left + (right - left)/2;
-			if (nums[mid] > target)
-			{
-				right = mid;
-			}
-			else left = mid + 1;
-		}
-		int r = right-1;
-        left = 0;
-        right = nums.size();
-        while(left < right)
-		{
-			int mid = left + (right - left)/2;
-			if (nums[mid] >= target)
-			{
-				right = mid;
-			}
-			else left = mid + 1;
-		}
-		int l = right;
-		// if (l>=r )
-		// {
-		// 	return {-1,-1};
-		// }
-		// else {return {l,r};}
-        if (l < nums.size() && nums[l] == target)
-        {
-            return {l, r};
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int left = 0,right = nums.size();
+        while(left<right){
+            int mid = left + (right - left)/2;
+            if(nums[mid] > target){
+                right = mid;
+            }
+            else {left = right + 1;}
         }
-        return {-1, -1};
-	}
+        int r = right -1;
+        left = 0,right = nums.size();
+        while(left < right){
+            int mid = left + (right-left)/2;
+            if(nums[mid]>= target){
+                right = mid;
+            }
+            else {left = mid + 1;}
+        }
+        int l = right;
+        if(l<=r & nums.size() != 0){
+            return {l,r};
+        }
+        else {return {-1,-1};}
+    }
 };
 
 int main()
 {
-	vector<int> nums = {5,7,7,8,8,10};
-	int target = 8;
+	vector<int> nums = {1};
+	int target = 1;
 	Solution sol;
 	vector<int> back = sol.searchRange(nums,target);
 	cout<<back[0]<<" "<<back[1]<<endl;
