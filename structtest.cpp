@@ -46,10 +46,11 @@ int main() {
     {3,"kda",555.8}
   };
   int count = sizeof(students) / sizeof(students[0]);
-  for (auto p= students; p < students + count; p++) {
-    cout << p->num  << endl;
-    cout << p->name << endl;
-    cout << p->grade<<endl;
+  // 注意两种不同的for循环遍历
+  for (auto &p : students) {
+    cout << p.num << endl;
+    cout << p.name << endl;
+    cout << p.grade << endl;
   }
 
 
