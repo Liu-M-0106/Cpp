@@ -1,2 +1,2 @@
 # Cpp
-The processing of studying Cpp!
+The processing of study Cpp!
