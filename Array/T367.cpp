@@ -2,7 +2,7 @@
 // 。 完全平方数
 // 是一个可以写成某个整数的平方的整数。换句话说，它可以写成某个整数和自身的乘积。
 // 不能使用任何内置的库函数，如  sqrt 。
-
+// 与T69相似（Array\T69.cpp）
 #include <iostream>
 using namespace std;
 class Solution {

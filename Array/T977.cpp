@@ -26,26 +26,28 @@ using namespace std;
 //         return nums;
 //     }
 // };
-class Solution {
-public:
-    vector<int> sortedSquares(vector<int>& nums) {
-      int fast = nums.size() - 1, slow = 0;
-      vector<int> nums1 = nums;
-      int i = fast;
-      while(slow<=fast){
-      if (nums[fast] * nums[fast] <= nums[slow] * nums[slow]) {
-        nums1[i] = nums[slow]*nums[slow];
-        slow++;
-      }
-      else {
-        nums1[i] = nums[fast]*nums[fast];
-        fast--;
-      }
-      i--;
-      }
-      return nums1;
-    }
-};
+//
+// 个人题解——双指针
+// class Solution {
+// public:
+//     vector<int> sortedSquares(vector<int>& nums) {
+//       int fast = nums.size() - 1, slow = 0;
+//       vector<int> nums1 = nums;
+//       int i = fast;
+//       while(slow<=fast){
+//       if (nums[fast] * nums[fast] <= nums[slow] * nums[slow]) {
+//         nums1[i] = nums[slow]*nums[slow];
+//         slow++;
+//       }
+//       else {
+//         nums1[i] = nums[fast]*nums[fast];
+//         fast--;
+//       }
+//       i--;
+//       }
+//       return nums1;
+//     }
+// };
 
 // 代码随想录题解
 class Solution {
