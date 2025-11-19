@@ -26,7 +26,7 @@ public:
           str2 += t[fast];
           slow++;
         } else {
-          if (str1.empty()) {
+          if (str2.empty()) {
             continue;
           }
           slow--;
