@@ -191,39 +191,78 @@ using namespace std;
 //         return {-1, -1};
 // 	}
 // };
-// 10.28 自写题解-参考标准题解-注意结果输出if部分存在隐患
+// // 10.28 自写题解-参考标准题解-注意结果输出if部分存在隐患
+// class Solution {
+// public:
+//     vector<int> searchRange(vector<int>& nums, int target) {
+//         int left = 0,right = nums.size();
+//         while(left<right){
+//             int mid = left + (right - left)/2;
+//             if(nums[mid] > target){
+//                 right = mid;
+//             }
+//             else {left = right + 1;}
+//         }
+//         int r = right -1;
+//         left = 0,right = nums.size();
+//         while(left < right){
+//             int mid = left + (right-left)/2;
+//             if(nums[mid]>= target){
+//                 right = mid;
+//             }
+//             else {left = mid + 1;}
+//         }
+//         int l = right;
+//         if(l<=r & nums.size() != 0){
+//             return {l,r};
+//         }
+//         else {return {-1,-1};}
+//     }
+// };
+
+// 自写题解-11.22
 class Solution {
 public:
-    vector<int> searchRange(vector<int>& nums, int target) {
-        int left = 0,right = nums.size();
-        while(left<right){
-            int mid = left + (right - left)/2;
-            if(nums[mid] > target){
-                right = mid;
-            }
-            else {left = right + 1;}
-        }
-        int r = right -1;
-        left = 0,right = nums.size();
-        while(left < right){
-            int mid = left + (right-left)/2;
-            if(nums[mid]>= target){
-                right = mid;
-            }
-            else {left = mid + 1;}
-        }
-        int l = right;
-        if(l<=r & nums.size() != 0){
-            return {l,r};
-        }
-        else {return {-1,-1};}
+  vector<int> searchRange(vector<int> &nums, int target) {
+    int left = 0, right = nums.size()-1;
+    while (left <= right) {
+      int mid = left + (right - left) / 2;
+      if (nums[mid] >= target) {
+        right = mid-1;
+      }
+      else if (nums[mid]< target) {
+        left = mid+1;
+      }
     }
+    int l = left;
+
+    left = 0,right = nums.size()-1;
+    while (left <= right) {
+      int mid = left + (right - left) / 2;
+      if (nums[mid] > target) {
+        right = mid-1;
+      }
+      else if (nums[mid]<= target) {
+        left = mid+1;
+      }
+    }
+    int r = right;
+    if (l>r) {
+        return {-1,-1};
+    }
+    else if (l == r && nums.empty()) {
+        return {-1,-1};
+    }
+    else {
+    return {l,r};
+    }
+  }
 };
 
 int main()
 {
-	vector<int> nums = {1};
-	int target = 1;
+	vector<int> nums = {5,7,7,8,8,10};
+	int target = 8;
 	Solution sol;
 	vector<int> back = sol.searchRange(nums,target);
 	cout<<back[0]<<" "<<back[1]<<endl;
