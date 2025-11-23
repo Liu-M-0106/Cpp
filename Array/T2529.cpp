@@ -10,7 +10,29 @@ using namespace std;
 class Solution {
 public:
     int maximumCount(vector<int>& nums) {
-        
+      int left = 0, right = nums.size()-1;
+      while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] <= 0) {
+          left = mid+1;
+        }
+        else if (nums[mid]>0) {
+            right = mid -1;
+        }
+      }
+      int max0 = nums.size() - left;
+      left = 0, right = nums.size() - 1;
+      while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] < 0) {
+          left = mid+1;
+        }
+        else if (nums[mid]>=0) {
+            right = mid -1;
+        }
+      }
+      int min0 = left ;
+      return max(min0,max0);
     }
 };
 
