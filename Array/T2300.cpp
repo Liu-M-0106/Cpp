@@ -24,19 +24,25 @@ public:
       }
       return a;
     }
+
     vector<int> successfulPairs(vector<int>& spells, vector<int>& potions, long long success) {
       int n = spells.size(), m = potions.size();
       vector<int> a(n);
-      sort(potions.begin(),potions.end());
+      sort(potions.begin(), potions.end());
+    //   内循环二分查找
       for (int i = 0; i <= n - 1; i++) {
-        int count = 0;
-        for (int j = 0; j <= m - 1; j++) {
-          long long num = spells[i]*potions[j];
-            if (num >= success) {
-                count++;
-            }
-        }
-        a[i] = count;
+        int left = 0, right = m - 1;
+        while (left <= right) {
+          int mid = left + (right - left) / 2;
+          long long num = (long long)spells[i]*potions[mid];
+          if (num >= success) {
+            right = mid-1;
+          }
+          else{
+            left = mid+1;
+          }
+        }    
+        a[i] = m-left;
       }
       return a;
     }
@@ -47,7 +53,7 @@ int main() {
   vector<int> potions = {9,8,6,9,5,1,2,3,5};
   long long success = 7;
   Solution solve;
-  vector<int> a = solve.successfulPairs(spells, potions, success);
+  vector<int> a = solve.successfulPairs1(spells, potions, success);
   for (auto b : a) {
     cout<<b<<'\n';  
   }
