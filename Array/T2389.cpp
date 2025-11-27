@@ -14,26 +14,31 @@ public:
       int n = nums.size(), m = queries.size();
       vector<int> answer(m, 0);
       sort(nums.begin(), nums.end());
-      for (int i = 0;i<m; i++) {
-        int left = 0, right = 0, sum = 0, count = 0;
-        for (;right < n;right++) {
-          sum += nums[right];
-          if (sum > queries[i]) {
-            break;
-          }
-        }
-        answer[i] = right-left;
+      vector<int> nums1(n+1,0);
+      for (int i = 0;i<n;i++) {
+        nums1[i+1] = nums1[i]+ nums[i];
       }
-
-
-
+      for (int i = 0; i < m; i++) {
+        int left=0,right=n+1;
+        while (left<right) {
+            int mid = left + (right-left)/2;
+            if (nums1[mid] <=queries[i]) {
+                left = mid + 1;
+            }
+            else if (nums1[mid]>queries[i]) {
+                right = mid;
+            }
+        }
+        answer[i] = left-1;
+      }
       return answer;
     }
 };
 
+
 int main() {
-  vector<int> nums = {2,3,4,5};
-  vector<int> queries = {1};
+  vector<int> nums = {4,5,2,1};
+  vector<int> queries = {3,10,21};
   Solution solve;
   vector<int> a = solve.answerQueries(nums, queries);
   for (auto b:a) {
